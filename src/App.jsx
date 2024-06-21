@@ -20,10 +20,17 @@ function App() {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-      setExcelData(data.slice(1)); // Ignorar encabezado
+  
+      // Procesar los datos para eliminar puntos en números
+      const processedData = data.slice(1).map(row => (
+        row.map(cell => typeof cell === 'string' && !isNaN(cell.replace(/\./g, '')) ? cell.replace(/\./g, '') : cell)
+      ));
+  
+      setExcelData(processedData); // Asignar los datos procesados
     };
     reader.readAsBinaryString(file);
   };
+  
 
   const handleExportCSV = () => {
     if (!excelData) return;
@@ -123,9 +130,9 @@ function App() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {excelData.map((row, index) => (
-                  <tr key={index}>
+                    <tr key={index}>
                     <td className="px-6 py-4 text-sm text-gray-900">{String(row[0]).padStart(3, '0')}</td>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row[1]}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{row[1].replace(/\n/g, ' ')}</td> {/* Reemplazar saltos de línea con espacios */}
                     <td className="px-6 py-4 text-sm text-gray-900">{row[2]}</td>
                     <td className="px-6 py-4 text-sm text-gray-900">{bidIncrement}</td>
                     <td className="px-6 py-4 text-sm text-gray-900">{moment(startDate).format('MM/DD/YY hh:mm A')}</td>
