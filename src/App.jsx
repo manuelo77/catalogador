@@ -30,17 +30,18 @@ function App() {
 
     // Formatear los datos para CSV
     const formattedData = excelData.map((row, index) => {
+      const formattedLotNumber = String(row[0]).padStart(3, '0');
       const startDateTime = moment(startDate).format('MM/DD/YY hh:mm A');
       const endDateTime = moment(endDate).add(index * incrementMinutes, 'minutes').format('MM/DD/YY hh:mm A');
-      return [row[0], row[1], row[2], bidIncrement, startDateTime, endDateTime, row[3]];
+      return [formattedLotNumber, row[1], row[2], bidIncrement, startDateTime, endDateTime, row[3]];
     });
 
     // Agregar encabezados al CSV
-    const csvHeaders = ['lote_nro', 'descripcion', 'precio_base', 'incremento de la puja', 'fecha de inicio', 'fecha de finalizacion', 'vendedor'];
+    const csvHeaders = ['lote_nro', 'descripcion_', 'precio_base_', 'incremento de la puja', 'fecha de inicio', 'fecha de finalizacion', 'vendedor_'];
     const csvData = [csvHeaders, ...formattedData];
 
     return (
-      <CSVLink data={csvData} filename={'catalogo_para_fral.csv'} separator={'|'}>
+      <CSVLink data={csvData} filename={'exported_data.csv'} separator={'|'}>
         <button className="px-4 py-2 mt-4 font-semibold text-white bg-orange-500 rounded hover:bg-orange-700">Exportar a CSV</button>
       </CSVLink>
     );
@@ -49,6 +50,9 @@ function App() {
   return (
     <div className="min-h-screen p-8 bg-gray-100">
       <h1 className="mb-8 text-2xl font-bold text-center">Importar y exportar datos desde Excel con fechas configurables</h1>
+      <div className="p-4">
+      <a href="/formato_catalogo.xlsx" target="_blank" rel="noopener noreferrer" className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Descargar ejemplo de catalogo en excel</a>
+    </div>
       <div className="mb-4">
         <input
           type="file"
@@ -120,7 +124,7 @@ function App() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {excelData.map((row, index) => (
                   <tr key={index}>
-                    <td className="px-6 py-4 text-sm text-gray-900">{row[0]}</td>
+                    <td className="px-6 py-4 text-sm text-gray-900">{String(row[0]).padStart(3, '0')}</td>
                     <td className="px-6 py-4 text-sm text-gray-900">{row[1]}</td>
                     <td className="px-6 py-4 text-sm text-gray-900">{row[2]}</td>
                     <td className="px-6 py-4 text-sm text-gray-900">{bidIncrement}</td>
