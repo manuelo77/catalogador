@@ -36,12 +36,12 @@ function App() {
     });
 
     // Agregar encabezados al CSV
-    const csvHeaders = ['lote_nro', 'descripcion_', 'precio_base_', 'incremento de la puja', 'fecha de inicio', 'fecha de finalizacion', 'vendedor_'];
+    const csvHeaders = ['lote_nro', 'descripcion', 'precio_base', 'incremento de la puja', 'fecha de inicio', 'fecha de finalizacion', 'vendedor'];
     const csvData = [csvHeaders, ...formattedData];
 
     return (
-      <CSVLink data={csvData} filename={'exported_data.csv'} separator={'|'}>
-        <button className="px-4 py-2 mt-4 font-semibold text-white bg-blue-500 rounded hover:bg-blue-700">Exportar a CSV</button>
+      <CSVLink data={csvData} filename={'catalogo_para_fral.csv'} separator={'|'}>
+        <button className="px-4 py-2 mt-4 font-semibold text-white bg-orange-500 rounded hover:bg-orange-700">Exportar a CSV</button>
       </CSVLink>
     );
   };
@@ -54,7 +54,7 @@ function App() {
           type="file"
           onChange={handleFileUpload}
           accept=".xlsx, .xls"
-          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
       </div>
 
@@ -64,7 +64,7 @@ function App() {
           type="datetime-local"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
       </div>
 
@@ -74,7 +74,7 @@ function App() {
           type="datetime-local"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
       </div>
 
@@ -86,7 +86,7 @@ function App() {
           min={1}
           step={1}
           onChange={(e) => setIncrementMinutes(parseInt(e.target.value))}
-          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
       </div>
 
@@ -98,7 +98,7 @@ function App() {
           min={1}
           step={1}
           onChange={(e) => setBidIncrement(parseInt(e.target.value))}
-          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
       </div>
 
